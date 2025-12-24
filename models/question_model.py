@@ -3,7 +3,7 @@ from utils.file_handler import load_json, save_json
 FILE = "data/questions.json"
 
 
-def add_question(content, a, b, c, d, correct):
+def add_question(content, a, b, c, d, correct,subject=None, topic=None):
     data = load_json(FILE)
 
     # đảm bảo cấu trúc
@@ -34,7 +34,7 @@ def get_all_questions():
     data = load_json(FILE)
     return data.get("questions", [])
 
-def update_question(q_id, content, a, b, c, d, correct):
+def update_question(q_id, content, a, b, c, d, correct,subject=None, topic=None):
     data = load_json(FILE)
     questions = data.get("questions", [])
     for q in questions:
