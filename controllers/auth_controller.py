@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from models.user_model import check_login
 
 auth_bp = Blueprint(
@@ -43,8 +43,13 @@ def login():
         user = check_login(email, password)
 
         if user:
+            session["user"] = user
             return redirect(url_for('dashboard'))
         else:
             return render_template('login.html', error="Sai email hoặc mật khẩu")
 
     return render_template('login.html')
+@auth_bp.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
