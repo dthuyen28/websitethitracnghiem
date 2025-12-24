@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from models.question_model import add_question, get_all_questions,update_question
+from models.question_model import add_question, get_all_questions,update_question,delete_question
 
 question_bp = Blueprint(
     'question',
@@ -57,3 +57,8 @@ def edit(q_id):
         return redirect(url_for('question.dashboard'))
 
     return render_template('edit_question.html', question=question)
+
+@question_bp.route('/delete/<int:q_id>', methods=['POST'])
+def delete(q_id):
+    delete_question(q_id)
+    return redirect(url_for('question.dashboard'))

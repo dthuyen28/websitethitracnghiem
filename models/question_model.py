@@ -43,3 +43,14 @@ def update_question(q_id, content, a, b, c, d, correct):
             save_json(FILE, data)
             return True
     return False
+
+def delete_question(q_id):
+    data = load_json(FILE)
+    questions = data.get("questions", [])
+    questions = [q for q in questions if q["id"] != q_id]  # loại bỏ câu hỏi theo id
+   
+    for index, q in enumerate(questions, start=1):
+        q["id"] = index
+    data["questions"] = questions
+    save_json(FILE, data)
+    return True
