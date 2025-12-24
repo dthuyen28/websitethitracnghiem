@@ -9,7 +9,19 @@ question_bp = Blueprint(
 
 @question_bp.route('/dashboard')
 def dashboard():
+    keyword = request.args.get('q', '').lower()
+    subject = request.args.get('subject', '').strip().lower()
+    topic = request.args.get('topic', '').strip().lower()
+
     questions = get_all_questions()
+
+    if keyword:
+        questions = [q for q in questions if keyword in q['content'].lower()]
+
+    if subject:
+        questions = [q for q in questions if q.get('subject') and subject in q['subject'].lower()]
+    if topic:
+        questions = [q for q in questions if q.get('topic') and topic in q['topic'].lower()]
     return render_template('dashboard.html', questions=questions)
 
 @question_bp.route('/add', methods=['GET', 'POST'])
@@ -21,6 +33,8 @@ def add():
         c = request.form.get('c')
         d = request.form.get('d')
         correct = request.form.get('correct')
+        subject = request.form.get('subject')  
+        topic = request.form.get('topic') 
 
         if not all([question, a, b, c, d, correct]):
             return render_template(
@@ -29,11 +43,12 @@ def add():
             )
 
         # gọi model
-        add_question(question, a, b, c, d, correct)
+        add_question(question, a, b, c, d, correct,subject, topic)
 
         return redirect(url_for('question.dashboard'))
 
     return render_template('add_question.html')
+
 @question_bp.route('/edit/<int:q_id>', methods=['GET', 'POST'])
 def edit(q_id):
     questions = get_all_questions()
@@ -49,11 +64,13 @@ def edit(q_id):
         c = request.form.get('c')
         d = request.form.get('d')
         correct = request.form.get('correct')
+        subject = request.form.get('subject')
+        topic = request.form.get('topic')
 
         if not all([content, a, b, c, d, correct]):
             return render_template('edit_question.html', question=question, error="Vui lòng nhập đầy đủ dữ liệu")
 
-        update_question(q_id, content, a, b, c, d, correct)
+        update_question(q_id, content, a, b, c, d, correct,subject, topic)
         return redirect(url_for('question.dashboard'))
 
     return render_template('edit_question.html', question=question)

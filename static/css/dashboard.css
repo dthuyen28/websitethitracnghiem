@@ -121,3 +121,13 @@ tr:hover {
     font-size: 13px;
     color: #777;
 }
+
+table td ul {
+    margin:4px 0 0 0;
+    padding-left:18px;
+}
+
+table td ul li {
+    margin-bottom:2px;
+    list-style-type: disc;
+}

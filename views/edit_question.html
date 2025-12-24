@@ -1,51 +1,63 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <title>Sửa câu hỏi</title>
     <link rel="stylesheet" href="/static/css/add_question.css">
 </head>
+
 <body>
 
-<div class="background"></div>
-<div class="container">
-    <div class="card">
-        <div class="header">
-            <h2>Sửa câu hỏi</h2>
-            <span>Quản lý ngân hàng câu hỏi trắc nghiệm</span>
+    <div class="background"></div>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h2>Sửa câu hỏi</h2>
+                <span>Quản lý ngân hàng câu hỏi trắc nghiệm</span>
+            </div>
+
+            <form method="post">
+                <div class="form-group">
+                    <label>Nội dung câu hỏi</label>
+                    <textarea name="question" required>{{ question.content }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Môn học</label>
+                    <input type="text" name="subject" value="{{ question.subject }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Chủ đề</label>
+                    <input type="text" name="topic" value="{{ question.topic }}" required>
+                </div>
+
+                <div class="grid">
+                    <input type="text" name="a" value="{{ question.answers.A }}" required>
+                    <input type="text" name="b" value="{{ question.answers.B }}" required>
+                    <input type="text" name="c" value="{{ question.answers.C }}" required>
+                    <input type="text" name="d" value="{{ question.answers.D }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Đáp án đúng</label>
+                    <select name="correct" required>
+                        <option value="">-- Chọn đáp án --</option>
+                        <option value="A" {% if question.correct=='A' %}selected{% endif %}>A</option>
+                        <option value="B" {% if question.correct=='B' %}selected{% endif %}>B</option>
+                        <option value="C" {% if question.correct=='C' %}selected{% endif %}>C</option>
+                        <option value="D" {% if question.correct=='D' %}selected{% endif %}>D</option>
+                    </select>
+                </div>
+
+                <div class="actions">
+                    <button class="btn-save">Lưu thay đổi</button>
+                    <a href="{{ url_for('question.dashboard') }}" class="btn-back">Quay lại</a>
+                </div>
+            </form>
         </div>
-
-        <form method="post">
-            <div class="form-group">
-                <label>Nội dung câu hỏi</label>
-                <textarea name="question" required>{{ question.content }}</textarea>
-            </div>
-
-            <div class="grid">
-                <input type="text" name="a" value="{{ question.answers.A }}" required>
-                <input type="text" name="b" value="{{ question.answers.B }}" required>
-                <input type="text" name="c" value="{{ question.answers.C }}" required>
-                <input type="text" name="d" value="{{ question.answers.D }}" required>
-            </div>
-
-            <div class="form-group">
-                <label>Đáp án đúng</label>
-                <select name="correct" required>
-                    <option value="">-- Chọn đáp án --</option>
-                    <option value="A" {% if question.correct=='A' %}selected{% endif %}>A</option>
-                    <option value="B" {% if question.correct=='B' %}selected{% endif %}>B</option>
-                    <option value="C" {% if question.correct=='C' %}selected{% endif %}>C</option>
-                    <option value="D" {% if question.correct=='D' %}selected{% endif %}>D</option>
-                </select>
-            </div>
-
-            <div class="actions">
-                <button class="btn-save">Lưu thay đổi</button>
-                <a href="{{ url_for('question.dashboard') }}" class="btn-back">Quay lại</a>
-            </div>
-        </form>
     </div>
-</div>
 
 </body>
+
 </html>
