@@ -2,14 +2,14 @@
     "questions": [
         {
             "id": 1,
-            "content": "câu hỏi 1",
+            "content": "câu hỏi 3\r\n",
             "answers": {
                 "A": "a",
                 "B": "d",
                 "C": "s",
                 "D": "f"
             },
-            "correct": "A"
+            "correct": "C"
         },
         {
             "id": 2,
