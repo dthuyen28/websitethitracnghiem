@@ -59,7 +59,7 @@
                         </td>
 
                         <td>
-                            <button class="btn-edit">Sửa</button>
+                            <a href="{{ url_for('question.edit', q_id=q.id) }}" class="btn-edit">Sửa</a>
                             <button class="btn-delete">Xóa</button>
                         </td>
                     </tr>
@@ -78,4 +78,4 @@
 
     </div>
 
-    </bod
+</body>

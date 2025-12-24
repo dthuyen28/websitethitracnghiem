@@ -31,3 +31,15 @@ def add_question(content, a, b, c, d, correct):
 def get_all_questions():
     data = load_json(FILE)
     return data.get("questions", [])
+
+def update_question(q_id, content, a, b, c, d, correct):
+    data = load_json(FILE)
+    questions = data.get("questions", [])
+    for q in questions:
+        if q["id"] == q_id:
+            q["content"] = content
+            q["answers"] = {"A": a, "B": b, "C": c, "D": d}
+            q["correct"] = correct
+            save_json(FILE, data)
+            return True
+    return False
