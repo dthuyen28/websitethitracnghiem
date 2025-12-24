@@ -22,7 +22,8 @@ def dashboard():
         questions = [q for q in questions if q.get('subject') and subject in q['subject'].lower()]
     if topic:
         questions = [q for q in questions if q.get('topic') and topic in q['topic'].lower()]
-    return render_template('dashboard.html', questions=questions)
+    return render_template('dashboard.html', questions=questions, keyword=keyword, subject=subject, topic=topic)
+
 
 @question_bp.route('/add', methods=['GET', 'POST'])
 def add():
