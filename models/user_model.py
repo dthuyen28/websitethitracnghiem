@@ -24,5 +24,10 @@ def register_user(name, email, password):
     save_json(FILE, users)
 
     return True
+
 def check_login(email, password):
-    pass
+    users = load_json(FILE)
+    for user in users:
+        if user['email'] == email and user['password'] == password:
+            return user
+    return None

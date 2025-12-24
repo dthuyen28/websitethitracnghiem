@@ -8,7 +8,7 @@ app.register_blueprint(auth_bp)
 
 @app.route('/')
 def index():
-    return redirect(url_for('auth.register'))
+    return redirect(url_for('auth.login'))
 
 @app.route('/dashboard')
 def dashboard():
