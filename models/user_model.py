@@ -1,26 +1,28 @@
 from utils.file_handler import load_json, save_json
-import json
-import os
 
-USER_FILE = "data/users.json"
 FILE = "data/users.json"
 
-def get_all_users():
-    return load_json(USER_FILE)
-def is_email_exists(email):
-    users = get_all_users()
-    return any(u["email"] == email for u in users)
-def add_user(fullname, email, password):
-    users = get_all_users()
+def register_user(name, email, password):
+    users = load_json(FILE)
+
+    # 1. kiểm tra email đã tồn tại chưa
+    for user in users:
+        if user['email'] == email:
+            return False   # email đã tồn tại
+
+    # 2. tạo user mới
     new_user = {
-        "id": len(users) + 1,
-        "fullname": fullname,
+        "name": name,
         "email": email,
-        "password": password,
-        "role": "student"
+        "password": password
     }
+
+    # 3. thêm vào danh sách
     users.append(new_user)
-    save_json(USER_FILE, users)
 
+    # 4. lưu lại file json
+    save_json(FILE, users)
 
-
+    return True
+def check_login(email, password):
+    pass
