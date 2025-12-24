@@ -27,6 +27,14 @@
             <div class="header">
                 <h1>Quản lý câu hỏi</h1>
             </div>
+            <div class="search-bar" style="margin-bottom:16px;">
+                <form method="get" action="{{ url_for('question.dashboard') }}" style="display:flex; gap:8px;">
+                    <input type="text" name="q" placeholder="Tìm kiếm câu hỏi..." value="{{ keyword|default('') }}"
+                        style="flex:1; padding:6px 10px; border-radius:6px; border:1px solid #ccc;">
+                    <button type="submit"
+                        style="padding:6px 12px; border:none; border-radius:6px; background:#4f46e5; color:white; cursor:pointer;">Tìm</button>
+                </form>
+            </div>
 
             <table>
                 <thead>
