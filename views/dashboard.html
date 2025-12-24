@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Quản lý câu hỏi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Trắc Nghiệm</h2>
+
+            <nav>
+                <a href="/dashboard" class="active">📚 Câu hỏi</a>
+                <a href="/question/add">➕ Thêm câu hỏi</a>
+                <a href="/logout">🚪 Đăng xuất</a>
+            </nav>
+        </aside>
+
+        <!-- Main -->
+        <main class="content">
+            <div class="header">
+                <h1>Quản lý câu hỏi</h1>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nội dung câu hỏi</th>
+                        <th>Đáp án đúng</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for q in questions %}
+                    <tr>
+                        <td>{{ q.id }}</td>
+
+                        <td>
+                            <strong>{{ q.content }}</strong>
+                            <ul style="margin-top:8px; padding-left:18px;">
+                                <li>A. {{ q.answers.A }}</li>
+                                <li>B. {{ q.answers.B }}</li>
+                                <li>C. {{ q.answers.C }}</li>
+                                <li>D. {{ q.answers.D }}</li>
+                            </ul>
+                        </td>
+
+                        <td>
+                            <span style="font-weight:bold; color:#4f46e5;">
+                                {{ q.correct }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <button class="btn-edit">Sửa</button>
+                            <button class="btn-delete">Xóa</button>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" style="text-align:center;">
+                            Chưa có câu hỏi nào
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+
+        </main>
+
+    </div>
+
+    </bod

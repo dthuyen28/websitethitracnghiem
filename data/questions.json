@@ -1,0 +1,37 @@
+{
+    "questions": [
+        {
+            "id": 1,
+            "content": "câu hỏi 1",
+            "answers": {
+                "A": "a",
+                "B": "d",
+                "C": "s",
+                "D": "f"
+            },
+            "correct": "A"
+        },
+        {
+            "id": 2,
+            "content": "câu hỏi 2",
+            "answers": {
+                "A": "a",
+                "B": "b",
+                "C": "c",
+                "D": "d"
+            },
+            "correct": "B"
+        },
+        {
+            "id": 3,
+            "content": "câu hỏi 3",
+            "answers": {
+                "A": "d",
+                "B": "g",
+                "C": "f",
+                "D": "b"
+            },
+            "correct": "B"
+        }
+    ]
+}
