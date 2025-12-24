@@ -2,17 +2,6 @@
     "questions": [
         {
             "id": 1,
-            "content": "câu hỏi 3\r\n",
-            "answers": {
-                "A": "a",
-                "B": "d",
-                "C": "s",
-                "D": "f"
-            },
-            "correct": "C"
-        },
-        {
-            "id": 2,
             "content": "câu hỏi 2",
             "answers": {
                 "A": "a",
@@ -23,7 +12,7 @@
             "correct": "B"
         },
         {
-            "id": 3,
+            "id": 2,
             "content": "câu hỏi 3",
             "answers": {
                 "A": "d",
