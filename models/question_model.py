@@ -1,4 +1,5 @@
 from utils.file_handler import load_json, save_json
+import random
 
 FILE = "data/questions.json"
 
@@ -68,3 +69,80 @@ def filter_questions(keyword="", subject="", topic=""):
     if topic:
         questions = [q for q in questions if q.get("topic") and topic.lower() in q["topic"].lower()]
     return questions
+# Đề thi
+def get_questions_by_ids(ids):
+    """
+    Lấy danh sách câu hỏi theo danh sách ID
+    """
+    data = load_json(FILE)
+    questions = data.get("questions", [])
+
+    id_set = set(ids)
+    return [q for q in questions if q.get("id") in id_set]
+
+def get_random_question_ids(subject=None, num_questions=0, topic=None):
+    """
+    Lấy ngẫu nhiên ID câu hỏi theo môn học / chủ đề
+    """
+
+    questions = get_all_questions()
+
+    # Lọc theo môn học
+    if subject:
+        questions = [
+            q for q in questions
+            if q.get("subject", "").lower() == subject.lower()
+        ]
+
+    # Lọc theo chủ đề (nếu có)
+    if topic:
+        questions = [
+            q for q in questions
+            if q.get("topic", "").lower() == topic.lower()
+        ]
+
+    # Không đủ câu hỏi
+    if len(questions) < num_questions:
+        return []
+
+    random.shuffle(questions)
+    return [q["id"] for q in questions[:num_questions]]
+def save_questions_from_excel(rows):
+    """
+    Lưu danh sách câu hỏi từ file Excel
+    rows: list[dict]
+    """
+    data = load_json(FILE)
+
+    if "questions" not in data:
+        data["questions"] = []
+
+    questions = data["questions"]
+    start_id = len(questions) + 1
+    new_ids = []
+
+    for i, row in enumerate(rows):
+        q = {
+            "id": start_id + i,
+            "content": row.get("content") or row.get("question"),
+            "answers": {
+                "A": row.get("A"),
+                "B": row.get("B"),
+                "C": row.get("C"),
+                "D": row.get("D"),
+            },
+            "correct": row.get("correct"),
+            "subject": row.get("subject"),
+            "topic": row.get("topic"),
+        }
+
+        # bỏ qua dòng không hợp lệ
+        if not q["content"] or not q["correct"]:
+            continue
+
+        questions.append(q)
+        new_ids.append(q["id"])
+
+    save_json(FILE, data)
+    return new_ids
+

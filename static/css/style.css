@@ -178,3 +178,70 @@ body {
     margin-top: 50px;
     border-top: 1px solid #eee;
 }
+/* ===============================
+   LAYOUT CHUNG – FULL WIDTH
+================================ */
+
+/* Khung layout tổng */
+.layout {
+    width: 100%;
+    min-height: calc(100vh - 70px); /* trừ header */
+    background: var(--bg-light);
+}
+
+/* Nội dung chính */
+.content {
+    width: 100%;
+    max-width: 100%;        /* ❗ bỏ giới hạn */
+    padding: 2rem 5%;       /* canh thẳng với header */
+    margin: 0 auto;
+}
+
+/* ===============================
+   EXAM – FULL WIDTH
+================================ */
+
+.exam-container {
+    width: 100%;
+    max-width: 100%;        /* ❗ không bó hẹp */
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* Header của trang exam */
+.exam-container .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Bảng đề thi */
+.exam-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.exam-table th,
+.exam-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #eee;
+}
+
+.exam-table th {
+    background: #f1f3f5;
+    font-weight: 700;
+}
+
+/* Trạng thái */
+.status.open {
+    color: #16a34a;
+    font-weight: 700;
+}
+
+.status.closed {
+    color: #dc2626;
+    font-weight: 700;
+}

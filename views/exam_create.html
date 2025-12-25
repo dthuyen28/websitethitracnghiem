@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Tạo đề thi{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/exam.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="background"></div>
+
+<div class="container">
+    <div class="card">
+        <div class="header-form">
+            <h2>Tạo đề thi</h2>
+            <span>Quản lý đề thi trắc nghiệm</span>
+        </div>
+
+        <form method="post" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label>Tên đề thi</label>
+                <input type="text" name="title" placeholder="Ví dụ: Đề Toán HK1" required>
+            </div>
+
+            <div class="form-group">
+                <label>Môn học</label>
+                <input type="text" name="subject" placeholder="Ví dụ: Toán" required>
+            </div>
+
+            <div class="form-group">
+                <label>Chủ đề</label>
+                <input type="text" name="topic" placeholder="Ví dụ: Đạo hàm">
+            </div>
+
+            <div class="form-group">
+                <label>Nguồn câu hỏi</label>
+                <select name="source_type" onchange="toggleSource(this.value)" required>
+                    <option value="select">Chọn từ ngân hàng câu hỏi</option>
+                    <option value="excel">Import từ Excel</option>
+                </select>
+            </div>
+
+            <!-- SELECT -->
+            <div class="form-group" id="source-select" style="display:none">
+                <label>Chọn câu hỏi</label>
+                <div style="max-height:250px; overflow:auto; border:1px solid #ddd; padding:10px">
+                    {% for q in questions %}
+                    <label style="display:block;margin-bottom:6px">
+                        <input type="checkbox" name="question_ids" value="{{ q.id }}">
+                        {{ q.content }}
+                        <small style="color:#666">
+                            ({{ q.subject }}{% if q.topic %} - {{ q.topic }}{% endif %})
+                        </small>
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- EXCEL -->
+            <div class="form-group" id="source-excel" style="display:none">
+                <label>File Excel</label>
+                <input type="file" name="file_excel" accept=".xls,.xlsx">
+            </div>
+
+            <div class="actions">
+                <button type="submit" class="btn-save">Tạo đề thi</button>
+                <a href="{{ url_for('exam.exam_list') }}" class="btn-back">Quay lại</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function toggleSource(v){
+    document.getElementById('source-select').style.display = v === 'select' ? 'block' : 'none';
+    document.getElementById('source-excel').style.display  = v === 'excel'  ? 'block' : 'none';
+}
+</script>
+{% endblock %}

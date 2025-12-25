@@ -16,11 +16,12 @@
 
 <!-- HEADER -->
 <header class="header">
-    <div class="logo">Trắc Nghiệm</div>
+    <div class="logo">🎓 Trắc Nghiệm</div>
 
     <nav class="nav-left">
         <a href="/dashboard">Trang Chủ </a>
-        <a href="/question/list">Danh sách câu hỏi</a>
+        <a href="/question/list">Ngân hàng câu hỏi</a>
+        <a href="{{ url_for('exam.exam_list') }}"> Đề thi</a>
     </nav>
 
     <nav class="nav-right">
