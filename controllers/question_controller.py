@@ -1,29 +1,31 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from models.question_model import add_question, get_all_questions,update_question,delete_question
+from models.question_model import add_question, get_all_questions, update_question, delete_question
 
 question_bp = Blueprint(
     'question',
     __name__,
     url_prefix='/question'
 )
-
 @question_bp.route('/dashboard')
 def dashboard():
-    keyword = request.args.get('q', '').lower()
-    subject = request.args.get('subject', '').strip().lower()
-    topic = request.args.get('topic', '').strip().lower()
+    questions = get_all_questions()
+    return render_template('dashboard.html', questions=questions)
 
+@question_bp.route('/list')
+def list_questions():
+    subject = request.args.get('subject', '')
+    topic = request.args.get('topic', '')
+    keyword = request.args.get('q', '').lower()
     questions = get_all_questions()
 
+    if subject:
+        questions = [q for q in questions if q.get('subject','').lower() == subject.lower()]
+    if topic:
+        questions = [q for q in questions if q.get('topic','').lower() == topic.lower()]
     if keyword:
         questions = [q for q in questions if keyword in q['content'].lower()]
 
-    if subject:
-        questions = [q for q in questions if q.get('subject') and subject in q['subject'].lower()]
-    if topic:
-        questions = [q for q in questions if q.get('topic') and topic in q['topic'].lower()]
-    return render_template('dashboard.html', questions=questions, keyword=keyword, subject=subject, topic=topic)
-
+    return render_template('question_list.html', questions=questions)
 
 @question_bp.route('/add', methods=['GET', 'POST'])
 def add():
@@ -38,25 +40,21 @@ def add():
         topic = request.form.get('topic') 
 
         if not all([question, a, b, c, d, correct]):
-            return render_template(
-                "add_question.html",
-                error="Vui lòng nhập đầy đủ dữ liệu"
-            )
+            return render_template("add_question.html", error="Vui lòng nhập đầy đủ dữ liệu")
 
-        # gọi model
-        add_question(question, a, b, c, d, correct,subject, topic)
-
-        return redirect(url_for('question.dashboard'))
+        add_question(question, a, b, c, d, correct, subject, topic)
+        # Sửa: Trả về đúng tên hàm list_questions
+        return redirect(url_for('question.list_questions'))
 
     return render_template('add_question.html')
 
-@question_bp.route('/edit/<int:q_id>', methods=['GET', 'POST'])
+@question_bp.route('/edit/<int:q_id>', methods=['GET', 'POST']) # Đã xóa chữ /question/ thừa
 def edit(q_id):
     questions = get_all_questions()
-    question = next((q for q in questions if q["id"] == q_id), None)
+    question = next((q for q in questions if q.get("id") == q_id), None)
 
     if not question:
-        return "Không tìm thấy câu hỏi", 404
+        return f"Không tìm thấy câu hỏi với ID: {q_id}", 404
 
     if request.method == 'POST':
         content = request.form.get('question')
@@ -71,12 +69,13 @@ def edit(q_id):
         if not all([content, a, b, c, d, correct]):
             return render_template('edit_question.html', question=question, error="Vui lòng nhập đầy đủ dữ liệu")
 
-        update_question(q_id, content, a, b, c, d, correct,subject, topic)
-        return redirect(url_for('question.dashboard'))
+        update_question(q_id, content, a, b, c, d, correct, subject, topic)
+        return redirect(url_for('question.list_questions'))
 
     return render_template('edit_question.html', question=question)
 
 @question_bp.route('/delete/<int:q_id>', methods=['POST'])
 def delete(q_id):
     delete_question(q_id)
-    return redirect(url_for('question.dashboard'))
+    # Sửa: Tên hàm là list_questions chứ không phải list
+    return redirect(url_for('question.list_questions'))
