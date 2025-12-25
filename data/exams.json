@@ -1,0 +1,47 @@
+{
+    "exams": [
+        {
+            "id": 1,
+            "title": "111",
+            "subject": "224",
+            "topic": "55",
+            "source_type": "select",
+            "question_ids": [
+                1,
+                2
+            ],
+            "num_questions": 2,
+            "duration": 60,
+            "shuffle": false,
+            "show_result": true,
+            "status": "closed"
+        },
+        {
+            "id": 2,
+            "title": "toán",
+            "subject": "văn",
+            "topic": "kdkh",
+            "source_type": "excel",
+            "question_ids": [],
+            "num_questions": 0,
+            "duration": 60,
+            "shuffle": true,
+            "show_result": true,
+            "status": "closed"
+        },
+        {
+            "id": 3,
+            "title": "linh tinh",
+            "subject": "fff",
+            "topic": "ddf",
+            "source_type": "excel",
+            "question_ids": [],
+            "num_questions": 0,
+            "duration": 60,
+            "shuffle": false,
+            "show_result": true,
+            "status": "closed"
+        }
+    
+    ]
+}
