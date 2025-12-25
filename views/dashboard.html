@@ -1,93 +1,21 @@
-<!DOCTYPE html>
-<html lang="vi">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard - Quản lý câu hỏi</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
-</head>
+{% block title %}Dashboard{% endblock %}
 
-<body>
+{% block content %}
 
-    <div class="layout">
+<div class="dashboard-page">
+    <div class="dashboard">
+        <div class="dashboard-header">
+            <h1>Quản lý</h1>
+            <p>Chọn một chức năng từ menu để bắt đầu làm việc.</p>
 
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <h2>Trắc Nghiệm</h2>
-
-            <nav>
-                <a href="/dashboard" class="active">📚 Câu hỏi</a>
-                <a href="/question/add">➕ Thêm câu hỏi</a>
-                <a href="/logout">🚪 Đăng xuất</a>
-            </nav>
-        </aside>
-
-        <!-- Main -->
-        <main class="content">
-            <div class="header">
-                <h1>Quản lý câu hỏi</h1>
+            <div class="dashboard-actions">
+                <a href="/question/add" class="btn btn-primary">➕ Thêm câu hỏi</a>
+                <a href="/question/list" class="btn btn-outline"> Danh sách câu hỏi</a>
             </div>
-
-            <div class="search-bar">
-                <form method="get" action="{{ url_for('question.dashboard') }}">
-                    <input type="text" name="subject" placeholder="Môn học..." value="{{ subject|default('') }}">
-                    <input type="text" name="topic" placeholder="Chủ đề..." value="{{ topic|default('') }}">
-                    <input type="text" name="q" placeholder="Tìm kiếm câu hỏi..." value="{{ keyword|default('') }}">
-                    <button type="submit">Tìm</button>
-                </form>
-            </div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Môn học</th>
-                        <th>Chủ đề</th>
-                        <th>Nội dung câu hỏi</th>
-                        <th>Đáp án đúng</th>
-                        <th>Hành động</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for q in questions %}
-                    <tr>
-                        <td>{{ q.id }}</td>
-                        <td>{{ q.subject }}</td>
-                        <td>{{ q.topic }}</td>
-                        <td>
-                            <strong>{{ q.content }}</strong>
-                            <ul>
-                                <li>A. {{ q.answers.A }}</li>
-                                <li>B. {{ q.answers.B }}</li>
-                                <li>C. {{ q.answers.C }}</li>
-                                <li>D. {{ q.answers.D }}</li>
-                            </ul>
-                        </td>
-
-                        <td> {{ q.correct }}</td>
-
-                        <td>
-                            <a href="{{ url_for('question.edit', q_id=q.id) }}" class="btn-edit">Sửa</a>
-                            <form action="{{ url_for('question.delete', q_id=q.id) }}" method="post"
-                                style="display:inline;">
-                                <button type="submit" class="btn-delete"
-                                    onclick="return confirm('Bạn có chắc muốn xóa?');">Xóa</button>
-                            </form>
-                        </td>
-                    </tr>
-                    {% else %}
-                    <tr>
-                        <td colspan="4" style="text-align:center;">
-                            Chưa có câu hỏi nào
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-
-            </table>
-
-        </main>
-
+        </div>
     </div>
+</div>
 
-</body>
+{% endblock %}

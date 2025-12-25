@@ -2,40 +2,29 @@
     "questions": [
         {
             "id": 1,
-            "content": "câu hỏi 2",
+            "content": "muahahahahahahha sửa đươc rồi nè hihi",
             "answers": {
-                "A": "a",
-                "B": "b",
-                "C": "c",
-                "D": "d"
+                "A": "k",
+                "B": "a",
+                "C": "h",
+                "D": "c"
             },
             "correct": "B",
-            "subject": "df",
-            "topic": "mt"
+            "subject": "hhh",
+            "topic": "uuu"
         },
         {
             "id": 2,
-            "content": "câu hỏi 3",
+            "content": "helu",
             "answers": {
-                "A": "d",
-                "B": "g",
-                "C": "f",
-                "D": "b"
+                "A": "anh",
+                "B": "lý",
+                "C": "hóa",
+                "D": "sinh"
             },
-            "correct": "B"
-        },
-        {
-            "id": 3,
-            "content": "d",
-            "answers": {
-                "A": "d",
-                "B": "ff",
-                "C": "dg",
-                "D": "ff"
-            },
-            "correct": "C",
-            "subject": "f",
-            "topic": "sd"
+            "correct": "B",
+            "subject": "văn",
+            "topic": "toán"
         }
     ]
 }
