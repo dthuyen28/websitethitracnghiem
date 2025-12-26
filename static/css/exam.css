@@ -111,11 +111,15 @@ form,
 .exam-table td {
     padding: 14px 16px;
     border-bottom: 1px solid #eee;
+    text-align: center;
 }
 
 .exam-table th {
     background: #f1f3f5;
     font-weight: 700;
+}
+.exam-table td:first-child {
+    text-align: left;
 }
 /* Trạng thái */
 .status.open {

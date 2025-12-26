@@ -1,3 +1,18 @@
+.page-header {
+    display: flex;
+    justify-content: space-between; /* Tiêu đề bên trái, nút bên phải */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin-bottom: 20px; /* Giữ khoảng cách với nội dung bên dưới */
+}
+
+.page-header .page-title {
+    margin: 0; /* Loại bỏ margin mặc định nếu có */
+}
+
+.page-header .btn {
+    margin: 0; /* Loại bỏ margin nút */
+}
+
 .page-title {
     margin-bottom: 20px;
 }

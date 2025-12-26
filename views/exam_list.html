@@ -46,6 +46,21 @@
                 <td>
                 <!-- Nút Config -->
                 <a href="{{ url_for('exam.exam_config', id=e.id) }}">⚙️</a>
+                {% if e.status == 'closed' %}
+                    <a title="Mở đề" href="{{ url_for('exam.exam_status', id=e.id, status='open') }}">
+                        🔒
+                    </a>
+                    {% else %}
+                    <a title="Đóng đề" href="{{ url_for('exam.exam_status', id=e.id, status='closed') }}">
+                        🔓
+                    </a>
+                    {% endif %}
+                    {% if e.status == 'closed' %}
+                    <form action="{{ url_for('exam.exam_delete', id=e.id) }}" method="post" style="display:inline;"
+                        onsubmit="return confirm('Bạn có chắc muốn xóa đề này?');">
+                        <button type="submit" title="Xóa">🗑️</button>
+                    </form>
+                    {% endif %}
                 </td>               
             </tr>
             {% endfor %}

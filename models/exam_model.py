@@ -88,3 +88,20 @@ def update_config(exam_id, duration=None, shuffle=None, show_result=None):
 
     save_exams(data)
     return True
+
+def update_status(exam_id, status):
+    data = load_exams()
+    for e in data["exams"]:
+        if e["id"] == exam_id:
+            e["status"] = status
+            save_exams(data)
+            return True
+    return False
+import json
+
+def delete_exam(exam_id):
+    data = load_json(EXAM_FILE)
+    exams = data.get("exams", [])
+    exams = [e for e in exams if e['id'] != exam_id]
+    data['exams'] = exams
+    save_json(EXAM_FILE, data)

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template,request, redirect, url_for, flash
 import pandas as pd
 from models.question_model import get_all_questions, save_questions_from_excel,get_all_questions
-from models.exam_model import get_all_exams,create_exam,get_exam_by_id, update_config
+from models.exam_model import get_all_exams,create_exam,get_exam_by_id, update_config, update_status, delete_exam
 
 exam_bp = Blueprint(
     'exam',
@@ -102,3 +102,37 @@ def exam_config(id):
 
 
     return render_template('exam_config.html', exam=exam, questions=questions)
+
+@exam_bp.route('/status/<int:id>/<status>')
+def exam_status(id, status):
+    if status not in ['open', 'closed']:
+        flash("Trạng thái không hợp lệ!")
+        return redirect(url_for('exam.exam_list'))
+    exam = get_exam_by_id(id)
+    if not exam:
+        flash("Không tìm thấy đề thi!")
+        return redirect(url_for('exam.exam_list'))
+    update_status(id, status)
+    if status == 'open':
+        flash("🟢 Đề thi đã được MỞ!")
+    else:
+        flash("🔴 Đề thi đã được ĐÓNG!")
+
+    return redirect(url_for('exam.exam_list'))
+
+@exam_bp.route('/delete/<int:id>', methods=['POST'])
+def exam_delete(id):
+    exam = get_exam_by_id(id)
+    if not exam:
+        flash("Không tìm thấy đề thi!")
+        return redirect(url_for('exam.exam_list'))
+
+    # Gọi hàm xóa trong model
+    try:
+        delete_exam(id)
+        flash("🗑️ Xóa đề thi thành công!")
+    except Exception as e:
+        flash(f"Lỗi khi xóa đề thi: {e}")
+
+
+    return redirect(url_for('exam.exam_list'))
