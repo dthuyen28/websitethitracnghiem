@@ -43,7 +43,10 @@
                     <span class="status closed">🔴 Đóng</span>
                     {% endif %}
                 </td>
-               
+                <td>
+                <!-- Nút Config -->
+                <a href="{{ url_for('exam.exam_config', id=e.id) }}">⚙️</a>
+                </td>               
             </tr>
             {% endfor %}
         </tbody>
