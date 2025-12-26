@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Hệ thống trắc nghiệm{% endblock %}</title>
+
+    <!-- CSS chung -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- CSS riêng từng trang -->
+    {% block css %}{% endblock %}
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="logo">🎓 Trắc Nghiệm</div>
+
+    <nav class="nav-left">
+        <a href="/dashboard">Trang Chủ </a>
+        <a href="/question/list">Ngân hàng câu hỏi</a>
+        <a href="{{ url_for('exam.exam_list') }}"> Đề thi</a>
+    </nav>
+
+    <nav class="nav-right">
+        <a href="/logout"> Đăng xuất</a>
+    </nav>
+</header>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+
+</div>
+
+</body>
+</html>

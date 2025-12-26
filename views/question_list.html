@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Quản lý câu hỏi{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/question_list.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="page-wrapper">
+
+    <div class="page-header">
+        <h1 class="page-title">Quản lý câu hỏi</h1>
+
+        <a href="/question/add" class="btn btn-primary">
+            ➕ Thêm câu hỏi
+        </a>
+    </div>
+
+    <form method="get" class="search-bar">
+        <input type="text" name="subject" placeholder="Môn học"
+               value="{{ request.args.get('subject', '') }}">
+        <input type="text" name="topic" placeholder="Chủ đề"
+               value="{{ request.args.get('topic', '') }}">
+        <input type="text" name="q" placeholder="Tìm kiếm câu hỏi..."
+               value="{{ request.args.get('q', '') }}">
+        <button type="submit" class="btn btn-outline">Tìm</button>
+    </form>
+
+    <div class="table-wrapper">
+        <table class="question-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Môn học</th>
+                    <th>Chủ đề</th>
+                    <th>Nội dung câu hỏi</th>
+                    <th>Đáp án đúng</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for q in questions %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ q.subject }}</td>
+                    <td>{{ q.topic }}</td>
+                    <td>
+                        <strong>{{ q.content }}</strong>
+                        <ul class="answer-list">
+                            <li>A. {{ q.answers.A }}</li>
+                            <li>B. {{ q.answers.B }}</li>
+                            <li>C. {{ q.answers.C }}</li>
+                            <li>D. {{ q.answers.D }}</li>
+                        </ul>
+                    </td>
+                    <td class="correct-answer">{{ q.correct }}</td>
+                    <td class="action-col">
+                        <a href="{{ url_for('question.edit', q_id=q.id) }}"
+                           class="btn-edit">Sửa</a>
+
+                        <form method="post"
+                              action="{{ url_for('question.delete', q_id=q.id) }}"
+                              style="display:inline;">
+                            <button class="btn-delete"
+                                    onclick="return confirm('Xóa câu hỏi này?');">
+                                Xóa
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" class="empty-row">Chưa có câu hỏi</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

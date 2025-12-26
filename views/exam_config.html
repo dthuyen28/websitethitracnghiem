@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Cấu hình đề thi{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/exam.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="background"></div>
+
+<div class="container">
+    <div class="card">
+
+        <!-- HEADER -->
+        <div class="header-form">
+            <h2>Cấu hình đề thi</h2>
+            <span>{{ exam.title }} – {{ exam.subject }}</span>
+        </div>
+
+        <!-- THÔNG TIN ĐỀ -->
+        <div class="form-group">
+            <p><strong>Môn học:</strong> {{ exam.subject }}</p>
+            <p><strong>Chủ đề:</strong> {{ exam.topic if exam.topic else 'Chung' }}</p>
+            <p><strong>Nguồn câu hỏi:</strong>
+                {% if exam.source_type == 'select' %}Ngân hàng
+                {% elif exam.source_type == 'excel' %}Excel
+                {% endif %}
+            </p>
+            <p><strong>Số câu hỏi:</strong> {{ exam.question_ids | length }}</p>
+            <p><strong>Thời gian:</strong> {{ exam.duration }} phút</p>
+            <p>
+                <strong>Trạng thái:</strong>
+                {% if exam.status == 'open' %}
+                    <span style="color:#16a34a;font-weight:700">Đang mở</span>
+                {% else %}
+                    <span style="color:#dc2626;font-weight:700">Đang đóng</span>
+                {% endif %}
+            </p>
+        </div>
+
+        <!-- DANH SÁCH CÂU HỎI -->
+        <div class="form-group">
+            <label>📄 Danh sách câu hỏi trong đề</label>
+            <div style="max-height:360px; overflow:auto; border:1px solid #e5e7eb; border-radius:12px; padding:16px; background:#f9fafb;">
+                {% for q in questions %}
+                <div style="margin-bottom:16px">
+                    <p><strong>{{ loop.index }}.</strong> {{ q.content }}</p>
+                    <ul style="margin-left:20px;font-size:14px">
+                        <li>A. {{ q.answers.A }}</li>
+                        <li>B. {{ q.answers.B }}</li>
+                        <li>C. {{ q.answers.C }}</li>
+                        <li>D. {{ q.answers.D }}</li>
+                    </ul>
+                    <p style="margin-top:6px">
+                        <strong style="color:#16a34a">✔ Đáp án đúng: {{ q.correct }}</strong>
+                    </p>
+                    <hr style="margin-top:12px">
+                </div>
+                {% else %}
+                <p style="color:#888;text-align:center">Không có câu hỏi nào trong đề</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- FORM CẤU HÌNH -->
+        <form method="post">
+            <div class="form-group">
+                <label>⏱ Thời gian làm bài (phút)</label>
+                <input type="number" name="duration" value="{{ exam.duration }}" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <label>
+<input type="checkbox" name="shuffle_questions" value="on" {% if exam.shuffle %}checked{% endif %}>
+                    Xáo trộn thứ tự câu hỏi
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" name="show_result" value="on" {% if exam.show_result %}checked{% endif %}>
+                    Hiển thị kết quả sau khi nộp bài
+                </label>
+            </div>
+
+            <div class="actions">
+                <button type="submit" class="btn-save">💾 Lưu cấu hình</button>
+                <a href="{{ url_for('exam.exam_list') }}" class="btn-back">⬅ Quay lại</a>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

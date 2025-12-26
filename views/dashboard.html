@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-page">
+    <div class="dashboard">
+        <div class="dashboard-header">
+            <h1>Quản lý</h1>
+            <p>Chọn một chức năng từ menu để bắt đầu làm việc.</p>
+
+            <div class="dashboard-actions">
+                <a href="/question/add" class="btn btn-primary">➕ Thêm câu hỏi</a>
+                <a href="/question/list" class="btn btn-outline"> Danh sách câu hỏi</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
