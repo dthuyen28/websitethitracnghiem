@@ -1,0 +1,21 @@
+<input type="checkbox" name="shuffle_questions" value="on" {% if exam.shuffle %}checked{% endif %}>
+                    Xáo trộn thứ tự câu hỏi
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" name="show_result" value="on" {% if exam.show_result %}checked{% endif %}>
+                    Hiển thị kết quả sau khi nộp bài
+                </label>
+            </div>
+
+            <div class="actions">
+                <button type="submit" class="btn-save">💾 Lưu cấu hình</button>
+                <a href="{{ url_for('exam.exam_list') }}" class="btn-back">⬅ Quay lại</a>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

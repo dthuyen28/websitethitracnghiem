@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template,request, redirect, url_for, flash
 import pandas as pd
-from models.question_model import get_all_questions, save_questions_from_excel
-from models.exam_model import get_all_exams,create_exam
+from models.question_model import get_all_questions, save_questions_from_excel,get_all_questions
+from models.exam_model import get_all_exams,create_exam,get_exam_by_id, update_config
 
 exam_bp = Blueprint(
     'exam',
@@ -74,3 +74,31 @@ def exam_create():
     # GET
     questions = get_all_questions()
     return render_template('exam_create.html', questions=questions)
+
+@exam_bp.route('/config/<int:id>', methods=['GET', 'POST'])
+def exam_config(id):
+    exam = get_exam_by_id(id)
+    if not exam:
+        flash("Không tìm thấy đề thi!")
+        return redirect(url_for('exam.exam_list'))
+    all_questions = get_all_questions()
+    questions = [q for q in all_questions if q['id'] in exam.get('question_ids', [])]
+
+
+    if request.method == 'POST':
+        try:
+            duration = int(request.form.get('duration', 60))
+            shuffle_questions = request.form.get('shuffle_questions') == 'on'
+            show_result = request.form.get('show_result') == 'on'
+
+
+            update_config(id, duration, shuffle_questions, show_result)
+            flash("Cập nhật cấu hình thành công!")
+        except ValueError:
+            flash("Vui lòng nhập số hợp lệ!")
+
+
+        return redirect(url_for('exam.exam_list'))
+
+
+    return render_template('exam_config.html', exam=exam, questions=questions)
