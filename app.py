@@ -3,7 +3,7 @@ from controllers.auth_controller import auth_bp
 from controllers.question_controller import question_bp
 from models.question_model import get_all_questions
 from controllers.exam_controller import exam_bp
-
+from controllers.result_controller import result_bp
 
 app = Flask(__name__, template_folder='views')
 app.secret_key = 'secret_key'
@@ -11,7 +11,7 @@ app.secret_key = 'secret_key'
 app.register_blueprint(auth_bp)
 app.register_blueprint(question_bp)
 app.register_blueprint(exam_bp)
-
+app.register_blueprint(result_bp)
 
 
 @app.route('/')

@@ -43,8 +43,10 @@ def login():
         user = check_login(email, password)
 
         if user:
-            session['user'] = user['email']
-
+            session['user'] = {
+                "email": user["email"],
+                "name": user["name"]
+            }
             return redirect(url_for('question.dashboard'))
         else:
             return render_template(

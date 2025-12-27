@@ -1,7 +1,12 @@
 [
-  {
-    "email": "test@gmail.com",
-    "password": "123",
-    "name": "Test User"
-  }
+    {
+        "email": "test@gmail.com",
+        "password": "123",
+        "name": "Test User"
+    },
+    {
+        "name": "Nguyễn Văn B",
+        "email": "b@gmail.com",
+        "password": "123"
+    }
 ]
