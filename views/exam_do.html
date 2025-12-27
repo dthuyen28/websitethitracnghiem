@@ -14,6 +14,22 @@
     <div id="timer" class="timer">
         ⏱️ Thời gian còn lại: <span id="time"></span>
     </div>
+    <form id="examForm">
+        {% for q in questions %}
+        <div class="question-box">
+            <p><b>Câu {{ loop.index }}:</b> {{ q.content }}</p>
+
+            {% for key, value in q.answers.items() %}
+            <label>
+                <input type="radio" name="q{{ q.id }}" value="{{ key }}">
+                {{ key }}. {{ value }}
+            </label><br>
+            {% endfor %}
+
+
+        </div>
+        {% endfor %}
+    </form>
 </div>
 
 <script>

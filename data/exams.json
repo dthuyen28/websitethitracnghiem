@@ -11,7 +11,7 @@
             "duration": 60,
             "shuffle": false,
             "show_result": true,
-            "status": "closed"
+            "status": "open"
         },
         {
             "id": 4,
@@ -27,7 +27,7 @@
             "duration": 60,
             "shuffle": true,
             "show_result": true,
-            "status": "closed"
+            "status": "open"
         }
     ],
     "metadata": {}

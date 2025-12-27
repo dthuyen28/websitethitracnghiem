@@ -160,7 +160,15 @@ def start_exam(id):
 
     if exam.get("status") != "open":
         flash("Bài thi đã đóng!")
-    questions = []
+        return redirect(url_for("exam.exam_session_list"))
+
+    all_questions = get_all_questions()
+    questions = [q for q in all_questions if q["id"] in exam["question_ids"]]
+
+    if exam.get("shuffle_questions"):
+        import random
+        random.shuffle(questions)
+    
     return render_template(
         "exam_do.html",
         exam=exam,
