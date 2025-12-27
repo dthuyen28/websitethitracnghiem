@@ -14,9 +14,9 @@
     <div id="timer" class="timer">
         ⏱️ Thời gian còn lại: <span id="time"></span>
     </div>
-    <form id="examForm"
+    <form id="examForm" 
         method="post"
-        action="{{ url_for('exam.submit_exam', id=exam.id) }}">
+        action="{{ url_for('result.submit_result', exam_id=exam.id) }}">
         
         {% for q in questions %}
         <div class="question-box">

@@ -1,0 +1,14 @@
+[
+    {
+        "exam_id": 4,
+        "student_name": "Nguyễn Văn B",
+        "student_email": "b@gmail.com",
+        "answers": {
+            "1": "A",
+            "2": "C"
+        },
+        "score": 1,
+        "total": 2,
+        "status": "submitted"
+    }
+]
