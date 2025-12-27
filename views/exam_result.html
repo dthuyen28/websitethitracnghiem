@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Kết quả bài thi{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/exam_do.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="exam-container">
+    <h2>📊 Kết quả bài thi</h2>
+
+    <p><b>Bài thi:</b> {{ exam.title }}</p>
+    
+    <p>Điểm của bạn:</p>
+    <span class="score-highlight">{{ score }} / {{ total }}</span>
+
+    <a href="{{ url_for('exam.exam_session_list') }}" class="btn">
+        ⬅ Quay lại danh sách bài thi
+    </a>
+</div>
+{% endblock %}
