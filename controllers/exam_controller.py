@@ -2,7 +2,7 @@ from flask import Blueprint, render_template,request, redirect, url_for, flash
 import pandas as pd
 from models.question_model import get_all_questions, save_questions_from_excel,get_all_questions
 from models.exam_model import get_all_exams,create_exam,get_exam_by_id, update_config, update_status, delete_exam
-
+from models.exam_session_model import get_open_exams
 exam_bp = Blueprint(
     'exam',
     __name__,
@@ -136,3 +136,30 @@ def exam_delete(id):
 
 
     return redirect(url_for('exam.exam_list'))
+@exam_bp.route("/exams")
+def open_exam_list():
+    exams = get_open_exams()
+    return render_template("exam_list.html", exams=exams)
+
+# học sinh xem danh sách bài thi
+@exam_bp.route("/open")
+def exam_session_list():
+    exams = get_open_exams()   # chỉ lấy đề status = open
+    return render_template(
+        "exam_session_list.html",
+        exams=exams
+    )
+# học sinh vào làm bài thi
+@exam_bp.route("/start/<int:id>")
+def start_exam(id):
+    exam = get_exam_by_id(id)
+
+    if not exam:
+        flash("Không tìm thấy bài thi!")
+        return redirect(url_for("exam.exam_session_list"))
+
+    if exam.get("status") != "open":
+        flash("Bài thi đã đóng!")
+        return redirect(url_for("exam.exam_session_list"))
+
+    return render_template("exam_do.html", exam=exam)

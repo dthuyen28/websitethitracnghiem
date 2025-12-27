@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Danh sách bài thi{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/exam.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="exam-container">
+    <div class="header">
+        <h2>📝 Danh sách bài thi</h2>
+    </div>
+
+    {% if exams %}
+    <table class="exam-table">
+        <thead>
+            <tr>
+                <th>Tên đề</th>
+                <th>Môn</th>
+                <th>Chủ đề</th>
+                <th>Số câu</th>
+                <th>Thời gian</th>
+                <th>Làm bài</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for e in exams %}
+            <tr>
+                <td>{{ e.title }}</td>
+                <td>{{ e.subject }}</td>
+                <td>{{ e.topic }}</td>
+                <td>{{ e.question_ids | length }}</td>
+                <td>{{ e.duration or 60 }} phút</td>
+                <td>
+                    <a class="btn-start"
+                       href="{{ url_for('exam.start_exam', id=e.id) }}">
+                        ▶️ Vào làm bài
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="empty">📭 Hiện chưa có bài thi nào đang mở</p>
+    {% endif %}
+</div>
+{% endblock %}
