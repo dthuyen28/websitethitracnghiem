@@ -33,3 +33,17 @@ def save_exam_result(result):
 
     with open(RESULT_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
+def load_results():
+    if not os.path.exists(RESULT_FILE):
+        return []
+
+    with open(RESULT_FILE, "r", encoding="utf-8") as f:
+        return json.load(f)
+def get_results_by_exam_and_student(exam_id, email):
+    results = load_results()
+    return [
+        r for r in results
+        if r["exam_id"] == exam_id
+        and r["student_email"] == email
+        and r["status"] == "submitted"
+    ]
