@@ -14,7 +14,10 @@
     <div id="timer" class="timer">
         ⏱️ Thời gian còn lại: <span id="time"></span>
     </div>
-    <form id="examForm">
+    <form id="examForm"
+        method="post"
+        action="{{ url_for('exam.submit_exam', id=exam.id) }}">
+        
         {% for q in questions %}
         <div class="question-box">
             <p><b>Câu {{ loop.index }}:</b> {{ q.content }}</p>
@@ -25,10 +28,11 @@
                 {{ key }}. {{ value }}
             </label><br>
             {% endfor %}
-
-
         </div>
         {% endfor %}
+        <button type="submit" class="btn-submit">
+            📤 Nộp bài
+        </button>
     </form>
 </div>
 

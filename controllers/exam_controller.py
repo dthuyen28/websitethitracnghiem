@@ -3,6 +3,8 @@ import pandas as pd
 from models.question_model import get_all_questions, save_questions_from_excel,get_all_questions
 from models.exam_model import get_all_exams,create_exam,get_exam_by_id, update_config, update_status, delete_exam
 from models.exam_session_model import get_open_exams
+from models.exam_result_model import save_exam_result
+
 exam_bp = Blueprint(
     'exam',
     __name__,
@@ -174,3 +176,14 @@ def start_exam(id):
         exam=exam,
         questions=questions
     )
+@exam_bp.route("/submit/<int:id>", methods=["POST"])
+def submit_exam(id):
+    exam = get_exam_by_id(id)
+    if not exam:
+        flash("Không tìm thấy bài thi!")
+        return redirect(url_for("exam.exam_session_list"))
+    answers = {}
+    for key, value in request.form.items():
+        question_id = int(key.replace("q", ""))
+        answers[question_id] = value
+    return redirect(url_for("exam.exam_session_list"))
