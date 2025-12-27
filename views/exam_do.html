@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Làm bài thi{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/exam_do.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="exam-container">
+
+    <h2>📝 {{ exam.title }}</h2>
+    <p><b>Môn:</b> {{ exam.subject }}</p>
+
+    <div id="timer" class="timer">
+        ⏱️ Thời gian còn lại: <span id="time"></span>
+    </div>
+</div>
+
+<script>
+    const DURATION = Number("{{ exam.duration }}") * 45 || 3600;
+</script>
+<script src="{{ url_for('static', filename='js/exam_do.js') }}"></script>
+{% endblock %}
