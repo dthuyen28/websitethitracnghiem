@@ -86,16 +86,23 @@ def submit_result(exam_id):
     )
 @result_bp.route("/view/<int:exam_id>")
 def view_result(exam_id):
-    from utils.file_handler import load_json
+    user = session.get("user")
+    if not user:
+        flash("Bạn chưa đăng nhập!")
+        return redirect(url_for("auth.login"))
 
-    results = load_json("data/results.json")
-    exam_results = [
-        r for r in results
-        if r.get("exam_id") == exam_id
-        and r.get("status") == "submitted"
-    ]
+    from models.exam_result_model import get_results_by_exam_and_student
+
+    results = get_results_by_exam_and_student(
+        exam_id=exam_id,
+        email=user["email"]
+    )
+
+    if not results:
+        flash("Chưa có kết quả!")
+        return redirect(url_for("exam.exam_session_list"))
 
     return render_template(
-        "result_list.html",
-        results=exam_results
+        "exam_result.html",
+        result=results[-1]  
     )

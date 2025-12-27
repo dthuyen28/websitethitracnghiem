@@ -47,6 +47,11 @@
                         ▶️
                     </a>
                 </td>
+                <td>
+                    <a class="btn-view" href="{{ url_for('exam.view_my_result', exam_id=e.id) }}">
+                        👁️
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

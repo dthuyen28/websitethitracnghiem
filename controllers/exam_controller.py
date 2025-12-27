@@ -1,9 +1,9 @@
-from flask import Blueprint, render_template,request, redirect, url_for, flash
+from flask import Blueprint, render_template,request, redirect, url_for, flash, session
 import pandas as pd
 from models.question_model import get_all_questions, save_questions_from_excel,get_all_questions
 from models.exam_model import get_all_exams,create_exam,get_exam_by_id, update_config, update_status, delete_exam
 from models.exam_session_model import get_open_exams
-from models.exam_result_model import save_exam_result
+from models.exam_result_model import save_exam_result, get_results_by_exam_and_student
 
 exam_bp = Blueprint(
     'exam',
@@ -207,3 +207,22 @@ def submit_exam(id):
         total=total
     )
     #return redirect(url_for("exam.exam_session_list"))
+@exam_bp.route("/result/<int:exam_id>")
+def view_my_result(exam_id):
+    user = session.get("user")
+    if not user:
+        flash("Bạn chưa đăng nhập!")
+        return redirect(url_for("auth.login"))
+
+    student_email = user["email"]
+
+    results = get_results_by_exam_and_student(exam_id, student_email)
+
+    if not results:
+        flash("Chưa có kết quả!")
+        return redirect(url_for("exam.exam_session_list"))
+
+    return render_template(
+        "exam_result.html",
+        result=results[0]
+    )
