@@ -182,8 +182,28 @@ def submit_exam(id):
     if not exam:
         flash("Không tìm thấy bài thi!")
         return redirect(url_for("exam.exam_session_list"))
+    question_ids = exam.get("question_ids", [])
+    all_questions = get_all_questions()
+
+    correct_map = {
+            q["id"]: q["correct"]
+            for q in all_questions
+            if q["id"] in question_ids
+        }
     answers = {}
     for key, value in request.form.items():
         question_id = int(key.replace("q", ""))
         answers[question_id] = value
-    return redirect(url_for("exam.exam_session_list"))
+    score = 0
+    for question_id, correct in correct_map.items():
+        if answers.get(question_id) == correct:
+            score += 1
+
+    total = len(correct_map)
+    return render_template(
+        "exam_result.html",
+        exam=exam,
+        score=score,
+        total=total
+    )
+    #return redirect(url_for("exam.exam_session_list"))

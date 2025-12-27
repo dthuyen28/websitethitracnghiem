@@ -31,3 +31,46 @@
     border-radius: 6px;
     cursor: pointer;
 }
+exam_do.css
+.exam-container p {
+    font-size: 1.1rem;
+    margin: 10px 0;
+    color: #334155;
+}
+
+.score-highlight {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #4479eb;
+    margin: 20px 0;
+    padding: 15px;
+    background: #eff6ff;
+    border-radius: 12px;
+    border: 2px dashed #3b82f6;
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 6px 12px;
+    font-size: 14px;
+    background: #6592f4;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #1d4ed8; 
+}
+
+.exam-container h2 {
+    text-align: center;
+    color: #1e293b;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 15px;
+}
