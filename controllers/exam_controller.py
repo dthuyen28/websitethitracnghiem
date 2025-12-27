@@ -144,7 +144,7 @@ def open_exam_list():
 # học sinh xem danh sách bài thi
 @exam_bp.route("/open")
 def exam_session_list():
-    exams = get_open_exams()   # chỉ lấy đề status = open
+    exams = get_open_exams()
     return render_template(
         "exam_session_list.html",
         exams=exams
@@ -160,6 +160,9 @@ def start_exam(id):
 
     if exam.get("status") != "open":
         flash("Bài thi đã đóng!")
-        return redirect(url_for("exam.exam_session_list"))
-
-    return render_template("exam_do.html", exam=exam)
+    questions = []
+    return render_template(
+        "exam_do.html",
+        exam=exam,
+        questions=questions
+    )
