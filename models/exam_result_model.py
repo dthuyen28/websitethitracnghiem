@@ -47,3 +47,10 @@ def get_results_by_exam_and_student(exam_id, email):
         and r["student_email"] == email
         and r["status"] == "submitted"
     ]
+def get_results_by_exam(exam_id):
+    results = load_results()
+    return [
+        r for r in results
+        if r["exam_id"] == exam_id
+        and r["status"] == "submitted"
+    ]

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Kết quả bài thi{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/exam.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="exam-container">
+    <div class="header">
+        <h2>📊 Kết quả bài thi: {{ exam.title }}</h2>
+        <a href="{{ url_for('exam.exam_list') }}" class="btn-create">
+            ⬅ Quay lại
+        </a>
+    </div>
+
+    {% if results %}
+    <table class="exam-table">
+        <thead>
+            <tr>
+                <th>Học sinh</th>
+                <th>Email</th>
+                <th>Điểm</th>
+                <th>Thời gian nộp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in results %}
+            <tr>
+                <td>👤 {{ r.student_name }}</td>
+                <td>{{ r.student_email }}</td>
+                <td>
+                    <strong>{{ r.score }}</strong> / {{ r.total }}
+                </td>
+                <td>{{ r.submitted_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p class="empty">📭 Chưa có học sinh nào nộp bài</p>
+    {% endif %}
+</div>
+{% endblock %}
