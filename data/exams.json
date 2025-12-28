@@ -1,19 +1,6 @@
 {
     "exams": [
         {
-            "id": 3,
-            "title": "linh tinh",
-            "subject": "fff",
-            "topic": "ddf",
-            "source_type": "excel",
-            "question_ids": [],
-            "num_questions": 0,
-            "duration": 60,
-            "shuffle": false,
-            "show_result": true,
-            "status": "open"
-        },
-        {
             "id": 4,
             "title": "czxc",
             "subject": "xzczx",

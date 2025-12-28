@@ -1,12 +1,23 @@
 [
     {
-        "email": "test@gmail.com",
-        "password": "123",
-        "name": "Test User"
+        "id": 1,
+        "name": "Giáo viên",
+        "email": "admin@gmail.com",
+        "password": "123456",
+        "role": "admin"
     },
     {
-        "name": "Nguyễn Văn B",
-        "email": "b@gmail.com",
-        "password": "123"
+        "id": 2,
+        "name": "Nguyễn Văn A",
+        "email": "sv@gmail.com",
+        "password": "123",
+        "role": "student"
+    },
+    {
+        "id": 3,
+        "name": "N",
+        "email": "n@gmail.com",
+        "password": "123",
+        "role": "student"
     }
 ]
