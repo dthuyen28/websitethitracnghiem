@@ -25,6 +25,32 @@
             "correct": "B",
             "subject": "văn",
             "topic": "toán"
+        },
+        {
+            "id": 3,
+            "content": "1+1= ",
+            "answers": {
+                "A": 1,
+                "B": 2,
+                "C": 3,
+                "D": 4
+            },
+            "correct": "B",
+            "subject": "Toán",
+            "topic": "Cộng"
+        },
+        {
+            "id": 4,
+            "content": "Thủ đô của Việt Nam",
+            "answers": {
+                "A": "Huế ",
+                "B": "SG",
+                "C": "Đà Nẵng",
+                "D": "Hà Nội"
+            },
+            "correct": "D",
+            "subject": "Địa ",
+            "topic": "DL"
         }
     ]
 }

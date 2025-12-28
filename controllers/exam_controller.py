@@ -52,11 +52,9 @@ def exam_create():
 
             try:
                 df = pd.read_excel(file)
-
-                question_ids = list(map(
-                    int,
-                    save_questions_from_excel(df.to_dict(orient='records'))
-            ))
+                df.columns = df.columns.str.strip()
+                question_ids = save_questions_from_excel(df.to_dict(orient='records')
+            )
 
             except Exception as e:
                 flash(f"Lỗi khi đọc file Excel: {e}")

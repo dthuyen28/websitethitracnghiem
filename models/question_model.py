@@ -118,31 +118,37 @@ def save_questions_from_excel(rows):
         data["questions"] = []
 
     questions = data["questions"]
-    start_id = len(questions) + 1
+
+    # ✅ ID an toàn
+    start_id = max([q["id"] for q in questions], default=0) + 1
     new_ids = []
 
     for i, row in enumerate(rows):
+        # 🔥 chuẩn hóa key (xóa khoảng trắng)
+        row = {k.strip(): v for k, v in row.items()}
+
+        content = row.get("content") or row.get("question")
+        correct = row.get("correct")
+
+        if not content or correct not in ["A", "B", "C", "D"]:
+            continue
+
         q = {
             "id": start_id + i,
-            "content": row.get("content") or row.get("question"),
+            "content": content,
             "answers": {
                 "A": row.get("A"),
                 "B": row.get("B"),
                 "C": row.get("C"),
                 "D": row.get("D"),
             },
-            "correct": row.get("correct"),
+            "correct": correct,
             "subject": row.get("subject"),
             "topic": row.get("topic"),
         }
-
-        # bỏ qua dòng không hợp lệ
-        if not q["content"] or not q["correct"]:
-            continue
 
         questions.append(q)
         new_ids.append(q["id"])
 
     save_json(FILE, data)
     return new_ids
-
