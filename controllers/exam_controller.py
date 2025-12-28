@@ -26,15 +26,12 @@ def exam_create():
         topic = request.form.get('topic')
         source_type = request.form.get('source_type')
 
-        # validate bắt buộc
         if not title or not subject:
             flash("Tên đề thi và môn học là bắt buộc!")
             return redirect(request.url)
 
         question_ids = []
 
-
-        # -------- CHỌN CÂU HỎI --------
         if source_type == 'select':
             ids = request.form.getlist('question_ids')
             if not ids:
@@ -43,7 +40,7 @@ def exam_create():
 
             question_ids = list(map(int, ids))
 
-        # -------- IMPORT EXCEL --------
+
         elif source_type == 'excel':
             file = request.files.get('file_excel')
             if not file or file.filename == '':
@@ -60,7 +57,6 @@ def exam_create():
                 flash(f"Lỗi khi đọc file Excel: {e}")
                 return redirect(request.url)
 
-        # -------- TẠO ĐỀ --------
         create_exam(
             title=title,
             subject=subject,
@@ -72,7 +68,6 @@ def exam_create():
         flash("🎉 Tạo đề thi thành công!")
         return redirect(url_for('exam.exam_list'))
 
-    # GET
     questions = get_all_questions()
     return render_template('exam_create.html', questions=questions)
 
@@ -131,7 +126,6 @@ def exam_delete(id):
         flash("Không tìm thấy đề thi!")
         return redirect(url_for('exam.exam_list'))
 
-    # Gọi hàm xóa trong model
     try:
         delete_exam(id)
         flash("🗑️ Xóa đề thi thành công!")
@@ -145,7 +139,6 @@ def open_exam_list():
     exams = get_open_exams()
     return render_template("exam_list.html", exams=exams)
 
-# học sinh xem danh sách bài thi
 @exam_bp.route("/open")
 def exam_session_list():
     exams = get_open_exams()
@@ -153,7 +146,7 @@ def exam_session_list():
         "exam_session_list.html",
         exams=exams
     )
-# học sinh vào làm bài thi
+
 @exam_bp.route("/start/<int:id>")
 def start_exam(id):
     exam = get_exam_by_id(id)

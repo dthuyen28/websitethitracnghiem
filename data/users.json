@@ -19,5 +19,12 @@
         "email": "n@gmail.com",
         "password": "123",
         "role": "student"
+    },
+    {
+        "id": 4,
+        "name": "Giáo viên",
+        "email": "adminn@gmail.com",
+        "password": "12",
+        "role": "admin"
     }
 ]
