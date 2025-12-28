@@ -18,7 +18,6 @@ def exam_results(exam_id):
         flash("Không tìm thấy đề thi!")
         return redirect(url_for("exam.exam_list"))
 
-    # Lọc kết quả theo bài thi
     results = [
         r for r in load_results()
         if r["exam_id"] == exam_id and r["status"] == "submitted"

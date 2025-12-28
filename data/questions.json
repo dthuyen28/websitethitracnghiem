@@ -2,29 +2,81 @@
     "questions": [
         {
             "id": 1,
-            "content": "muahahahahahahha sửa đươc rồi nè hihi",
+            "content": "Đơn vị đo lượng thông tin cơ sở là",
             "answers": {
-                "A": "k",
-                "B": "a",
-                "C": "h",
-                "D": "c"
+                "A": "Bit",
+                "B": "GHz",
+                "C": "GB",
+                "D": "Byte"
             },
-            "correct": "B",
-            "subject": "hhh",
-            "topic": "uuu"
+            "correct": "A",
+            "subject": "Tin học 10",
+            "topic": "Máy tính và xã hội tri thức "
         },
         {
             "id": 2,
-            "content": "helu",
+            "content": " Mã hoá thông tin có mục đích gì?",
             "answers": {
-                "A": "anh",
-                "B": "lý",
-                "C": "hóa",
-                "D": "sinh"
+                "A": "Để thay đổi lượng thông tin",
+                "B": "Để chuyển thông tin về dạng câu lệnh của ngôn ngữ máy.",
+                "C": " Làm cho thông tin phù hợp với dữ liệu trong máy",
+                "D": "ả A, B, C đều đúng"
+            },
+            "correct": "D",
+            "subject": "Tin học 10",
+            "topic": "Máy tính và xã hội tri thức "
+        },
+        {
+            "id": 3,
+            "content": "Một bit được biểu diễn ra sao?",
+            "answers": {
+                "A": "Chữ số bất kì",
+                "B": "Một chữ cái",
+                "C": " Kí hiệu 0 hoặc 1",
+                "D": "Một kí hiệu đặc biệt"
+            },
+            "correct": "C",
+            "subject": "Tin học 10",
+            "topic": "Máy tính và xã hội tri thức "
+        },
+        {
+            "id": 4,
+            "content": "Vì sao nên lưu trữ thông tin trên internet?",
+            "answers": {
+                "A": "Dung lượng bộ nhớ lớn",
+                "B": "Tất cả đều đúng",
+                "C": "Tính bảo mật cao, có thể tùy chỉnh",
+                "D": "Dễ dàng tìm kiếm"
             },
             "correct": "B",
-            "subject": "văn",
-            "topic": "toán"
+            "subject": "Tin học 11",
+            "topic": "Tổ chức lưu trữ, tìm kiếm và trao đổi thông tin"
+        },
+        {
+            "id": 5,
+            "content": "Internet giúp khắc phục giới hạn lưu trữ bằng ?",
+            "answers": {
+                "A": "Phân phối bán lẻ bộ nhớ",
+                "B": "Cho người dùng thuê bộ nhớ",
+                "C": "Bắt người dùng mua phần mềm thứ 3",
+                "D": "Các dịch vụ chia sẻ tệp tin trực tuyến"
+            },
+            "correct": "D",
+            "subject": "Tin học 11",
+            "topic": "Tổ chức lưu trữ, tìm kiếm và trao đổi thông tin"
+        },
+        {
+            "id": 6,
+            "content": " Siêu văn bản là gì?",
+            "answers": {
+                "A": "Là tài liệu điện tử đa phương tiện chứa duy nhất tệp văn bản",
+                "B": "Là tài liệu điện tử đa phương tiện chứa văn bản, hình ảnh, âm thanh, video và siêu liên kết",
+                "C": "Là siêu liên kết",
+                "D": " Là văn bản nhiều trang"
+            },
+            "correct": "B",
+            "subject": "Tin học 12",
+            "topic": "Giải quyết vấn đề với sự trợ giúp của máy"
         }
     ]
 }
