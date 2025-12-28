@@ -12,13 +12,11 @@
 <div class="container">
     <div class="card">
 
-        <!-- HEADER -->
         <div class="header-form">
             <h2>Cấu hình đề thi</h2>
             <span>{{ exam.title }} – {{ exam.subject }}</span>
         </div>
 
-        <!-- THÔNG TIN ĐỀ -->
         <div class="form-group">
             <p><strong>Môn học:</strong> {{ exam.subject }}</p>
             <p><strong>Chủ đề:</strong> {{ exam.topic if exam.topic else 'Chung' }}</p>
@@ -39,7 +37,6 @@
             </p>
         </div>
 
-        <!-- DANH SÁCH CÂU HỎI -->
         <div class="form-group">
             <label>📄 Danh sách câu hỏi trong đề</label>
             <div style="max-height:360px; overflow:auto; border:1px solid #e5e7eb; border-radius:12px; padding:16px; background:#f9fafb;">

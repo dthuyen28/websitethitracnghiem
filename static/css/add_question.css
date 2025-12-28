@@ -9,7 +9,6 @@ body {
     background: linear-gradient(135deg, #667eea, #764ba2);
 }
 
-/* nền mờ */
 .background {
     position: fixed;
     inset: 0;
@@ -17,7 +16,6 @@ body {
                 radial-gradient(circle at bottom right, #ffffff33, transparent 60%);
 }
 
-/* căn giữa */
 .container {
     min-height: 100vh;
     display: flex;
@@ -26,7 +24,6 @@ body {
     padding: 20px;
 }
 
-/* card glass */
 .card {
     width: 100%;
     max-width: 620px;
@@ -37,7 +34,7 @@ body {
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
 }
 
-/* header */
+
 .header {
     text-align: center;
     margin-bottom: 28px;
@@ -54,7 +51,6 @@ body {
     color: #666;
 }
 
-/* form */
 .form-group {
     margin-bottom: 18px;
 }
@@ -91,7 +87,6 @@ select:focus {
     box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.18);
 }
 
-/* đáp án */
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -99,7 +94,7 @@ select:focus {
     margin-bottom: 18px;
 }
 
-/* nút */
+
 .actions {
     display: flex;
     gap: 14px;
@@ -138,7 +133,7 @@ select:focus {
 .btn-back:hover {
     background: #e3e3e3;
 }
-/* Container bao quanh form để căn giữa */
+
 .container {
     display: flex;
     justify-content: center;
@@ -173,7 +168,7 @@ select:focus {
     font-size: 14px;
 }
 
-/* Form inputs */
+
 .form-group {
     margin-bottom: 20px;
 }
@@ -201,7 +196,7 @@ textarea:focus, input:focus {
     background: #fff;
 }
 
-/* Grid cho 4 đáp án */
+
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -209,7 +204,7 @@ textarea:focus, input:focus {
     margin-bottom: 20px;
 }
 
-/* Buttons */
+
 .actions {
     display: flex;
     gap: 15px;

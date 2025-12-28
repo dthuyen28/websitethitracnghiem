@@ -1,4 +1,4 @@
-/* Khai báo biến màu sắc để dễ quản lý */
+
 :root {
     --primary-color: #4facfe;
     --primary-hover: #1d4ed8;
@@ -19,7 +19,7 @@ body {
     padding: 20px;
 }
 
-/* Đổi .auth-card thành .login-box theo HTML của bạn */
+
 .login-box {
     background: white;
     width: 100%;
@@ -34,7 +34,7 @@ body {
     font-weight: 700;
     color: var(--text-dark);
     margin-bottom: 1.5rem;
-    text-align: center; /* Căn giữa tiêu đề */
+    text-align: center; 
 }
 
 .form-group {
@@ -54,7 +54,7 @@ body {
     padding: 0.75rem;
     border: 1px solid #d1d5db;
     border-radius: 0.5rem;
-    box-sizing: border-box; /* Đảm bảo padding không làm tràn input */
+    box-sizing: border-box; 
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -64,7 +64,6 @@ body {
     box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
 }
 
-/* Định dạng cho button (thay vì .btn-primary) */
 button[type="submit"] {
     width: 100%;
     background-color: var(--primary-color);
@@ -83,7 +82,6 @@ button[type="submit"]:hover {
     background-color: var(--primary-hover);
 }
 
-/* Định dạng thông báo lỗi */
 .error {
     color: var(--error-red);
     background-color: #fee2e2;
