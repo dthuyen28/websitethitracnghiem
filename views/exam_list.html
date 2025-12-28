@@ -46,6 +46,10 @@
                 <td>
                 <!-- Nút Config -->
                 <a href="{{ url_for('exam.exam_config', id=e.id) }}">⚙️</a>
+                <a title="Xem kết quả"
+       href="{{ url_for('admin.exam_results', exam_id=e.id) }}">
+        📊
+    </a>
                 {% if e.status == 'closed' %}
                     <a title="Mở đề" href="{{ url_for('exam.exam_status', id=e.id, status='open') }}">
                         🔒
