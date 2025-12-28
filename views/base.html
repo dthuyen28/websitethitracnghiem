@@ -19,14 +19,31 @@
     <div class="logo">🎓 Trắc Nghiệm</div>
 
     <nav class="nav-left">
-        <a href="/dashboard">Trang Chủ </a>
-        <a href="/question/list">Ngân hàng câu hỏi</a>
-        <a href="{{ url_for('exam.exam_list') }}"> Đề thi</a>
-        <a href="{{ url_for('exam.exam_session_list') }}">Bài thi</a>
+
+        {% if session.user %}
+
+            {# ===== ADMIN ===== #}
+            {% if session.user.role == 'admin' %}
+                <a href="{{ url_for('question.dashboard') }}">Trang chủ</a>
+                <a href="{{ url_for('question.list_questions') }}">Ngân hàng câu hỏi</a>
+                <a href="{{ url_for('exam.exam_list') }}">Quản lý đề thi</a>
+            {% endif %}
+
+            {# ===== STUDENT ===== #}
+            {% if session.user.role == 'student' %}
+                <a href="{{ url_for('question.dashboard') }}">Trang chủ</a>
+                <a href="{{ url_for('exam.exam_session_list') }}">Bài thi</a>
+            {% endif %}
+
+        {% endif %}
     </nav>
 
     <nav class="nav-right">
-        <a href="/logout"> Đăng xuất</a>
+        {% if session.user %}
+            <a href="{{ url_for('auth.logout') }}">Đăng xuất</a>
+        {% else %}
+            <a href="{{ url_for('auth.login') }}">Đăng nhập</a>
+        {% endif %}
     </nav>
 </header>
 

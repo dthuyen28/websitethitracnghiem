@@ -6,6 +6,7 @@ from models.exam_result_model import (
 from models.exam_model import get_exam_by_id
 from models.question_model import get_all_questions
 from datetime import datetime
+from models.exam_result_model import get_results_by_exam_and_student
 
 result_bp = Blueprint(
     "result",
@@ -82,9 +83,7 @@ def submit_result(exam_id):
 
     return render_template(
         "exam_result.html",
-        exam=exam,
-        score=score,
-        total=total
+        result=result
     )
 @result_bp.route("/view/<int:exam_id>")
 def view_result(exam_id):
@@ -92,21 +91,21 @@ def view_result(exam_id):
     if not user:
         flash("Bạn chưa đăng nhập!")
         return redirect(url_for("auth.login"))
-
-    from models.exam_result_model import get_results_by_exam_and_student
-
-    results = get_results_by_exam_and_student(
-        exam_id=exam_id,
-        email=user["email"]
-    )
+    
+    student_email = user["email"]
+    results = get_results_by_exam_and_student(exam_id, student_email)
 
     if not results:
         flash("Chưa có kết quả!")
         return redirect(url_for("exam.exam_session_list"))
+    results.sort(
+        key=lambda r: r.get("submitted_at", ""),
+        reverse=True
+    )
 
     return render_template(
         "exam_result.html",
-        result=results[-1]  
+        result=results[0]  
     )
 @result_bp.route("/admin/exam/<int:exam_id>")
 def admin_view_exam_results(exam_id):

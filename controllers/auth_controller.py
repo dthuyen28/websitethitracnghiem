@@ -45,9 +45,13 @@ def login():
         if user:
             session['user'] = {
                 "email": user["email"],
-                "name": user["name"]
+                "name": user["name"],
+                "role": user.get("role", "student")
             }
-            return redirect(url_for('question.dashboard'))
+            if user["role"] == "admin":
+                return redirect(url_for('question.dashboard'))
+            else:
+                return redirect(url_for('exam.exam_session_list'))
         else:
             return render_template(
                 'login.html',

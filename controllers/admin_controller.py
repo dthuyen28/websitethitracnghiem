@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, flash, redirect, url_for
 from models.exam_model import get_exam_by_id
 from models.exam_result_model import load_results
+from utils.decorators import admin_required
 
 admin_bp = Blueprint(
     "admin",
@@ -10,6 +11,7 @@ admin_bp = Blueprint(
 )
 
 @admin_bp.route("/results/<int:exam_id>")
+@admin_required
 def exam_results(exam_id):
     exam = get_exam_by_id(exam_id)
     if not exam:

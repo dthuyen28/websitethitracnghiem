@@ -4,7 +4,7 @@ from models.question_model import get_all_questions, save_questions_from_excel,g
 from models.exam_model import get_all_exams,create_exam,get_exam_by_id, update_config, update_status, delete_exam
 from models.exam_session_model import get_open_exams
 from models.exam_result_model import save_exam_result, get_results_by_exam_and_student
-
+from utils.decorators import admin_required
 exam_bp = Blueprint(
     'exam',
     __name__,
@@ -18,6 +18,7 @@ def exam_list():
     return render_template('exam_list.html', exams=exams)
 
 @exam_bp.route('/create', methods=['GET', 'POST'])
+@admin_required
 def exam_create():
     if request.method == 'POST':
         title = request.form.get('title')
@@ -78,6 +79,7 @@ def exam_create():
     return render_template('exam_create.html', questions=questions)
 
 @exam_bp.route('/config/<int:id>', methods=['GET', 'POST'])
+@admin_required
 def exam_config(id):
     exam = get_exam_by_id(id)
     if not exam:
@@ -106,6 +108,7 @@ def exam_config(id):
     return render_template('exam_config.html', exam=exam, questions=questions)
 
 @exam_bp.route('/status/<int:id>/<status>')
+@admin_required
 def exam_status(id, status):
     if status not in ['open', 'closed']:
         flash("Trạng thái không hợp lệ!")
@@ -123,6 +126,7 @@ def exam_status(id, status):
     return redirect(url_for('exam.exam_list'))
 
 @exam_bp.route('/delete/<int:id>', methods=['POST'])
+@admin_required
 def exam_delete(id):
     exam = get_exam_by_id(id)
     if not exam:
@@ -182,29 +186,46 @@ def submit_exam(id):
     if not exam:
         flash("Không tìm thấy bài thi!")
         return redirect(url_for("exam.exam_session_list"))
+    user = session.get("user")
+    if not user:
+        flash("Bạn chưa đăng nhập!")
+        return redirect(url_for("auth.login"))
+
+    student_email = user["email"]
+
     question_ids = exam.get("question_ids", [])
     all_questions = get_all_questions()
 
     correct_map = {
-            q["id"]: q["correct"]
-            for q in all_questions
-            if q["id"] in question_ids
-        }
+        q["id"]: q["correct"]
+        for q in all_questions
+        if q["id"] in question_ids
+    }
+
     answers = {}
     for key, value in request.form.items():
         question_id = int(key.replace("q", ""))
         answers[question_id] = value
-    score = 0
-    for question_id, correct in correct_map.items():
-        if answers.get(question_id) == correct:
-            score += 1
+
+    score = sum(
+        1 for qid, correct in correct_map.items()
+        if answers.get(qid) == correct
+    )
 
     total = len(correct_map)
+
+    result = {
+        "exam_id": id,
+        "exam_title": exam["title"],
+        "student_email": student_email,
+        "student_name": user.get("name", ""),
+        "score": score,
+        "total": total
+    }
+
     return render_template(
         "exam_result.html",
-        exam=exam,
-        score=score,
-        total=total
+        result=result
     )
     #return redirect(url_for("exam.exam_session_list"))
 @exam_bp.route("/result/<int:exam_id>")

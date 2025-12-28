@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from models.question_model import add_question, get_all_questions, update_question, delete_question
-
+from utils.decorators import admin_required
 question_bp = Blueprint(
     'question',
     __name__,
@@ -28,6 +28,7 @@ def list_questions():
     return render_template('question_list.html', questions=questions)
 
 @question_bp.route('/add', methods=['GET', 'POST'])
+@admin_required
 def add():
     if request.method == 'POST':
         question = request.form.get('question')
@@ -48,7 +49,8 @@ def add():
 
     return render_template('add_question.html')
 
-@question_bp.route('/edit/<int:q_id>', methods=['GET', 'POST']) # Đã xóa chữ /question/ thừa
+@question_bp.route('/edit/<int:q_id>', methods=['GET', 'POST'])
+@admin_required
 def edit(q_id):
     questions = get_all_questions()
     question = next((q for q in questions if q.get("id") == q_id), None)
@@ -75,6 +77,7 @@ def edit(q_id):
     return render_template('edit_question.html', question=question)
 
 @question_bp.route('/delete/<int:q_id>', methods=['POST'])
+@admin_required
 def delete(q_id):
     delete_question(q_id)
     # Sửa: Tên hàm là list_questions chứ không phải list

@@ -1,14 +1,28 @@
 [
     {
         "exam_id": 4,
-        "student_name": "Nguyễn Văn B",
-        "student_email": "b@gmail.com",
+        "student_name": "Test User",
+        "student_email": "test@gmail.com",
         "answers": {
-            "1": "A",
-            "2": "C"
+            "1": "C",
+            "2": "A"
+        },
+        "score": 0,
+        "total": 2,
+        "submitted_at": "2025-12-28T13:58:28.291328",
+        "status": "submitted"
+    },
+    {
+        "exam_id": 4,
+        "student_name": "Test User",
+        "student_email": "test@gmail.com",
+        "answers": {
+            "1": "C",
+            "2": "B"
         },
         "score": 1,
         "total": 2,
+        "submitted_at": "2025-12-28T13:58:50.342479",
         "status": "submitted"
     }
 ]

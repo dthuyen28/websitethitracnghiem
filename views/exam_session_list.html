@@ -31,6 +31,7 @@
                 <th>Số câu</th>
                 <th>Thời gian</th>
                 <th>Làm bài</th>
+                <th>Kết quả</th>
             </tr>
         </thead>
 
@@ -48,7 +49,7 @@
                     </a>
                 </td>
                 <td>
-                    <a class="btn-view" href="{{ url_for('exam.view_my_result', exam_id=e.id) }}">
+                    <a class="btn-view" href="{{ url_for('result.view_result', exam_id=e.id) }}">
                         👁️
                     </a>
                 </td>
