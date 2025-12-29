@@ -5,9 +5,10 @@ from models.question_model import get_all_questions
 from controllers.exam_controller import exam_bp
 from controllers.result_controller import result_bp
 from controllers.admin_controller import admin_bp
+import os
 
 app = Flask(__name__, template_folder='views')
-app.secret_key = 'secret_key'
+app.secret_key = os.environ.get("SECRET_KEY", "dev_key")
 
 app.register_blueprint(auth_bp)
 app.register_blueprint(question_bp)
@@ -26,4 +27,5 @@ def dashboard():
     return render_template("dashboard.html")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)

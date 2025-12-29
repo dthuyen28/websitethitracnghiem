@@ -2,7 +2,9 @@ import json
 import os
 from datetime import datetime
 
-RESULT_FILE = "data/results.json"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+RESULT_FILE = os.path.join(BASE_DIR, "..", "data", "results.json")
+
 def save_temp_exam_result(result):
     """
     Lưu kết quả tạm thời khi đang làm bài

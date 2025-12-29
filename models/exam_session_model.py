@@ -1,8 +1,11 @@
 # models/exam_session_model.py
 
 from utils.file_handler import load_json
+import os
 
-EXAM_FILE = 'data/exams.json'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+EXAM_FILE = os.path.join(BASE_DIR, "..", "data", "exams.json")
+
 
 def get_open_exams():
     """

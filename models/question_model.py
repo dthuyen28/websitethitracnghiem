@@ -1,7 +1,9 @@
 from utils.file_handler import load_json, save_json
-import random
+import random, os
 
-FILE = "data/questions.json"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FILE = os.path.join(BASE_DIR, "..", "data", "questions.json")
+
 
 
 def add_question(content, a, b, c, d, correct,subject=None, topic=None):

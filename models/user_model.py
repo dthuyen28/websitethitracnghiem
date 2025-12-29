@@ -1,6 +1,9 @@
 from utils.file_handler import load_json, save_json
+import os
 
-FILE = "data/users.json"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FILE = os.path.join(BASE_DIR, "..", "data", "users.json")
+
 
 def get_all_users():
     return load_json(FILE)
